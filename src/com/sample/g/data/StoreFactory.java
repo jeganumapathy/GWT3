@@ -7,6 +7,8 @@ import java.util.List;
 public class StoreFactory implements Constants {
 	private static StoreFactory instance;
 
+	public static final int STORE_LIMIT = 100;
+
 	public static StoreFactory getInstance() {
 		if (instance == null) {
 			instance = new StoreFactory();
@@ -40,9 +42,11 @@ public class StoreFactory implements Constants {
 		if (FOODCATAGORIES.equalsIgnoreCase(dataStore.getApiName())) {
 			FoodCatagories obj = (FoodCatagories) dataStore;
 			try {
-				List<FoodCatagories> obj2 = ofy().load().type(FoodCatagories.class).filter("name", obj.name).list();
+				List<FoodCatagories> obj2 = ofy().load()
+						.type(FoodCatagories.class).limit(STORE_LIMIT).list();
 				for (FoodCatagories foodCatagories : obj2) {
-					return false;
+					if (obj.name.equalsIgnoreCase(foodCatagories.name))
+						return false;
 				}
 			} catch (Exception e) {
 				return true;

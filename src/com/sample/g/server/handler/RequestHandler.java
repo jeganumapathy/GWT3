@@ -12,6 +12,8 @@ public class RequestHandler extends AbstractHandler {
 	private HttpServletRequest request;
 	private JsonHandler jsonHandler;
 	private ActionListener actionListener;
+	public String startLimit;
+	public String endLimit;
 
 	public RequestHandler(BaseHttpServlet basehttpservlet) {
 		jsonHandler = new JsonHandler(basehttpservlet, this);
@@ -24,8 +26,8 @@ public class RequestHandler extends AbstractHandler {
 	@Override
 	public void doProcessPost() throws IOException {
 		String requestJson = request.getParameter(DATA);
-		String startLimit = request.getParameter(START_LIMIT);
-		String endLimit = request.getParameter(END_LIMIT);
+		startLimit = request.getParameter(START_LIMIT);
+		endLimit = request.getParameter(END_LIMIT);
 		if (requestJson != null && requestJson.length() > 2) {
 			jsonHandler.onHandle(requestJson);
 			if (actionListener != null) {
