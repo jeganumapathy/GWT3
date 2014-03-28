@@ -12,7 +12,7 @@ public class RecipeIngredient extends AbstractDatastore {
 	}
 
 	@Id
-	public long id;
+	public Long id;
 	public String comments;
 	public List<Ingredient> ingredientList;
 

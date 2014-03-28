@@ -10,7 +10,7 @@ public class FoodCatagories extends AbstractDatastore {
 	}
 
 	@Id
-	public long id;
+	public Long id;
 	
 	public String name;
 

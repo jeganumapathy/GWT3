@@ -2,7 +2,9 @@ package com.sample.g.data;
 
 import static com.sample.g.data.OfyService.ofy;
 
-public class StoreFactory {
+import java.util.List;
+
+public class StoreFactory implements Constants {
 	private static StoreFactory instance;
 
 	public static StoreFactory getInstance() {
@@ -14,12 +16,14 @@ public class StoreFactory {
 
 	/**
 	 * synchronous Store a Data object into the GOOGLE data store.
+	 * 
 	 * @param dataStore
 	 */
 	public static void store(AbstractDatastore dataStore) {
 		if (dataStore instanceof FoodCatagories) {
 			FoodCatagories obj = (FoodCatagories) dataStore;
-			ofy().save().entity(obj).now();
+			if (shouldSave(dataStore))
+				ofy().save().entity(obj).now();
 		} else if (dataStore instanceof Ingredient) {
 			Ingredient obj = (Ingredient) dataStore;
 			ofy().save().entity(obj).now();
@@ -30,6 +34,21 @@ public class StoreFactory {
 			RecipeIngredient obj = (RecipeIngredient) dataStore;
 			ofy().save().entity(obj).now();
 		}
+	}
+
+	public static boolean shouldSave(AbstractDatastore dataStore) {
+		if (FOODCATAGORIES.equalsIgnoreCase(dataStore.getApiName())) {
+			FoodCatagories obj = (FoodCatagories) dataStore;
+			try {
+				List<FoodCatagories> obj2 = ofy().load().type(FoodCatagories.class).filter("name", obj.name).list();
+				for (FoodCatagories foodCatagories : obj2) {
+					return false;
+				}
+			} catch (Exception e) {
+				return true;
+			}
+		}
+		return true;
 	}
 
 	public static void getStoreById(long id) {

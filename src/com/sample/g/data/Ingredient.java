@@ -10,7 +10,7 @@ public class Ingredient extends AbstractDatastore {
 	}
 
 	@Id
-	public  long id;
+	public Long id;
 	public String name;
 	public int count;
 

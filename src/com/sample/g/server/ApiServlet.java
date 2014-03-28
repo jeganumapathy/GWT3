@@ -17,15 +17,22 @@ public class ApiServlet extends BaseHttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public ApiServlet() {
-		requestHandler = new RequestHandler();
-		responseHandler = new ResponseHandler();
+		requestHandler = new RequestHandler(this);
+		responseHandler = new ResponseHandler(this);
+	}
+
+	@Override
+	public void onPostComplete() throws IOException{
+		responseHandler.doProcessPost();
 	}
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		resp.setContentType("text/plain");
-		resp.getWriter().println("---" + OfyService.read());
+		if (isValidRequest) {
+			resp.setContentType("text/plain");
+			resp.getWriter().println("---" + OfyService.read("", ""));
+		}
 	}
 
 	@Override
@@ -34,7 +41,6 @@ public class ApiServlet extends BaseHttpServlet {
 		super.doPost(req, resp);
 		if (isValidRequest) {
 			requestHandler.doProcessPost();
-			responseHandler.doProcessPost();
 		}
 	}
 

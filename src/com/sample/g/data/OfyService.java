@@ -28,7 +28,7 @@ public class OfyService {
 		StoreFactory.store(dataStore);
 	}
 
-	public static String read() {
+	public static String read(String startLimit, String endLimit) {
 		List<FoodCatagories> c = ofy().load().type(FoodCatagories.class)
 				.limit(QUERY_LIMIT).list();
 		StringBuilder nBuilder = new StringBuilder();
@@ -37,10 +37,11 @@ public class OfyService {
 		}
 		return nBuilder.toString();
 	}
-	
-	public static void delete(){
-		ofy().delete().type(AbstractDatastore.class);
-		
-	}
 
+	public static void delete() {
+		List<FoodCatagories> c = ofy().load().type(FoodCatagories.class).list();
+		for (FoodCatagories fc : c) {
+			ofy().delete().type(FoodCatagories.class).id(fc.getId()).now();
+		}
+	}
 }
