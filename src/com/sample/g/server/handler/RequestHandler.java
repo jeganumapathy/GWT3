@@ -6,17 +6,18 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.sample.g.server.ActionListener;
 import com.sample.g.server.BaseHttpServlet;
+import com.sample.g.server.service.JsonService;
 
 public class RequestHandler extends AbstractHandler {
 
 	private HttpServletRequest request;
-	private JsonHandler jsonHandler;
+	private JsonService jsonHandler;
 	private ActionListener actionListener;
 	public String startLimit;
 	public String endLimit;
 
 	public RequestHandler(BaseHttpServlet basehttpservlet) {
-		jsonHandler = new JsonHandler(basehttpservlet, this);
+		jsonHandler = new JsonService(basehttpservlet, this);
 	}
 
 	public void setOnActionListener(ActionListener actionListener) {

@@ -1,11 +1,22 @@
-package com.sample.g.data;
+package com.sample.g.server.service;
 
 import java.util.List;
 
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
+import com.sample.g.data.AbstractDatastore;
+import com.sample.g.data.FoodCatagories;
+import com.sample.g.data.Ingredient;
+import com.sample.g.data.JsonAnalyser;
+import com.sample.g.data.Recipe;
+import com.sample.g.data.RecipeIngredient;
 
+/**
+ * Should update here data
+ * 
+ * @author jacky
+ */
 public class OfyService {
 
 	private static final int QUERY_LIMIT = 10;
@@ -28,7 +39,8 @@ public class OfyService {
 		StoreFactory.store(dataStore);
 	}
 
-	public static String read(String startLimit, String endLimit) {
+	public static String read(String startLimit, String endLimit,
+			AbstractDatastore datastore) {
 		List<FoodCatagories> c = ofy().load().type(FoodCatagories.class)
 				.limit(QUERY_LIMIT).list();
 		StringBuilder nBuilder = new StringBuilder();

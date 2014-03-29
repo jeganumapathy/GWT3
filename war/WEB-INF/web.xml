@@ -12,6 +12,27 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 	<servlet-mapping>
 		<servlet-name>apiservlet</servlet-name>
-		<url-pattern>/api/v1</url-pattern>
+		<url-pattern>/put/v1</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>deleteapiservelet</servlet-name>
+		<servlet-class>com.sample.g.server.DeleteApiServelet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>deleteapiservelet</servlet-name>
+		<url-pattern>/delete/v1</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>retriveapiservlet</servlet-name>
+		<servlet-class>com.sample.g.server.RetriveApiServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>retriveapiservlet</servlet-name>
+		<url-pattern>/get/v1</url-pattern>
 	</servlet-mapping>
 </web-app>

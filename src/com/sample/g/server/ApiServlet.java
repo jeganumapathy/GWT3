@@ -6,9 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sample.g.data.OfyService;
 import com.sample.g.server.handler.RequestHandler;
 import com.sample.g.server.handler.ResponseHandler;
+import com.sample.g.server.service.OfyService;
 
 public class ApiServlet extends BaseHttpServlet {
 
@@ -22,17 +22,8 @@ public class ApiServlet extends BaseHttpServlet {
 	}
 
 	@Override
-	public void onPostComplete() throws IOException{
+	public void onPostComplete() throws IOException {
 		responseHandler.doProcessPost();
-	}
-
-	@Override
-	public void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException {
-		if (isValidRequest) {
-			resp.setContentType("text/plain");
-			resp.getWriter().println("---" + OfyService.read("", ""));
-		}
 	}
 
 	@Override
@@ -42,6 +33,11 @@ public class ApiServlet extends BaseHttpServlet {
 		if (isValidRequest) {
 			requestHandler.doProcessPost();
 		}
+	}
+
+	@Override
+	public void onGetComplete() throws IOException {
+		
 	}
 
 }

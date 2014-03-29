@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sample.g.server.handler.RequestHandler;
 import com.sample.g.server.handler.ResponseHandler;
+import com.sample.g.server.service.OfyService;
 
-public class RetriveApiServlet  extends BaseHttpServlet {
+public class RetriveApiServlet extends BaseHttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,10 +29,24 @@ public class RetriveApiServlet  extends BaseHttpServlet {
 	}
 
 	@Override
+	public void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+		requestHandler.doProcessGet();
+
+	}
+
+	@Override
 	public void onPostComplete() throws IOException {
 		HttpServletResponse response = responseHandler.getResponse();
 		response.setContentType("text/plain");
 		response.getWriter().println("Deleted..");
+	}
+
+	@Override
+	public void onGetComplete() throws IOException {
+		HttpServletResponse resp = responseHandler.getResponse();
+		resp.setContentType("text/plain");
+		resp.getWriter().println(DATA + "=" + OfyService.read("", "", null));
 	}
 
 }

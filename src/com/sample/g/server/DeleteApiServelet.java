@@ -34,4 +34,8 @@ public class DeleteApiServelet extends BaseHttpServlet {
 		response.getWriter().println("Deleted..");
 	}
 
+	@Override
+	public void onGetComplete() throws IOException {
+	}
+
 }
