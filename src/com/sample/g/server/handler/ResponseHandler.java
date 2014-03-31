@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.sample.g.data.OfyService;
 import com.sample.g.server.BaseHttpServlet;
+import com.sample.g.server.service.OfyService;
 
 public class ResponseHandler extends AbstractHandler {
 	
@@ -17,7 +17,7 @@ public class ResponseHandler extends AbstractHandler {
 	public void doProcessPost() {
 		try {
 			response.setContentType("text/plain");
-			response.getWriter().println("Success.." + OfyService.read("", ""));
+			response.getWriter().println("Success.." + OfyService.read("", "",null));
 		} catch (IOException e) {
 			processError(e.getMessage());
 		}

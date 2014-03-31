@@ -6,4 +6,6 @@ public interface ActionListener {
 
 	public void onPostComplete() throws IOException;
 	
+	public void onGetComplete() throws IOException;
+	
 }

@@ -1,14 +1,29 @@
-package com.sample.g.data;
+package com.sample.g.server.service;
 
-import static com.sample.g.data.OfyService.ofy;
+import static com.sample.g.server.service.OfyService.ofy;
 
 import java.util.List;
 
+import com.sample.g.data.AbstractDatastore;
+import com.sample.g.data.Constants;
+import com.sample.g.data.FoodCatagories;
+import com.sample.g.data.Ingredient;
+import com.sample.g.data.Recipe;
+import com.sample.g.data.RecipeIngredient;
+
+/**
+ * Should update data here
+ * @author jacky
+ */
 public class StoreFactory implements Constants {
 	private static StoreFactory instance;
 
 	public static final int STORE_LIMIT = 100;
 
+	/**
+	 * Retrieve a instance for store factory
+	 * @return
+	 */
 	public static StoreFactory getInstance() {
 		if (instance == null) {
 			instance = new StoreFactory();
@@ -51,6 +66,20 @@ public class StoreFactory implements Constants {
 			} catch (Exception e) {
 				return true;
 			}
+		}else if(INGREDIENT.equalsIgnoreCase(dataStore.getApiName())){
+			Ingredient obj = (Ingredient) dataStore;
+			try {
+				List<Ingredient> obj2 = ofy().load()
+						.type(Ingredient.class).limit(STORE_LIMIT).list();
+				for (Ingredient i : obj2) {
+					if (obj.name.equalsIgnoreCase(i.name))
+						return false;
+				}
+			} catch (Exception e) {
+				return true;
+			}
+		}else if(RECIPEINGREDIENT.equalsIgnoreCase(dataStore.getApiName())){
+			//RecipeIngredient obj = (RecipeIngredient) dataStore;
 		}
 		return true;
 	}

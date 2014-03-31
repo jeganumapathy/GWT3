@@ -1,24 +1,25 @@
-package com.sample.g.server.handler;
+package com.sample.g.server.service;
 
 import com.google.gson.Gson;
 import com.sample.g.data.AbstractDatastore;
 import com.sample.g.data.Constants;
 import com.sample.g.data.FoodCatagories;
 import com.sample.g.data.Ingredient;
-import com.sample.g.data.OfyService;
 import com.sample.g.data.Recipe;
 import com.sample.g.data.RecipeIngredient;
 import com.sample.g.server.ApiServlet;
 import com.sample.g.server.BaseHttpServlet;
 import com.sample.g.server.DeleteApiServelet;
 import com.sample.g.server.RetriveApiServlet;
+import com.sample.g.server.handler.AbstractHandler;
+import com.sample.g.server.handler.RequestHandler;
 
-public class JsonHandler implements Constants {
+public class JsonService implements Constants {
 	Gson gson = null;
 	BaseHttpServlet basehttpservlet;
 	AbstractHandler abstractHandler;
 
-	public JsonHandler(BaseHttpServlet basehttpservlet,
+	public JsonService(BaseHttpServlet basehttpservlet,
 			AbstractHandler abstractHandler) {
 		this.basehttpservlet = basehttpservlet;
 		this.abstractHandler = abstractHandler;
