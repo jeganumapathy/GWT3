@@ -6,9 +6,8 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 
-public class OfyService {
+public class OfyService implements Constants {
 
-	private static final int QUERY_LIMIT = 10;
 	static {
 		factory().register(FoodCatagories.class);
 		factory().register(Ingredient.class);
@@ -28,12 +27,44 @@ public class OfyService {
 		StoreFactory.store(dataStore);
 	}
 
-	public static String read(String startLimit, String endLimit) {
-		List<FoodCatagories> c = ofy().load().type(FoodCatagories.class)
-				.limit(QUERY_LIMIT).list();
+	public static String read(String startLimit, String endLimit,
+			AbstractDatastore abstractDatastore) {
+		int endLimitInt = Integer.valueOf(endLimit);
+		int startLimitInt = Integer.valueOf(endLimit);
+		if (startLimitInt != -1 && startLimitInt < endLimitInt) {
+			return "error should have a limit";
+		}
+		return readData(abstractDatastore, endLimitInt);
+	}
+
+	public static String readData(AbstractDatastore abstractDatastore, int limit) {
 		StringBuilder nBuilder = new StringBuilder();
-		for (FoodCatagories foodCatagories : c) {
-			nBuilder.append(JsonAnalyser.printJSON(foodCatagories));
+		if (FOODCATAGORIES.equalsIgnoreCase(abstractDatastore.getApiName())) {
+			List<FoodCatagories> c = ofy().load().type(FoodCatagories.class)
+					.limit(limit).list();
+			for (FoodCatagories foodCatagories : c) {
+				nBuilder.append(JsonAnalyser.printJSON(foodCatagories));
+			}
+
+		} else if (INGREDIENT.equalsIgnoreCase(abstractDatastore.getApiName())) {
+			List<Ingredient> c = ofy().load().type(Ingredient.class)
+					.limit(limit).list();
+			for (Ingredient foodCatagories : c) {
+				nBuilder.append(JsonAnalyser.printJSON(foodCatagories));
+			}
+		} else if (RECIPEINGREDIENT.equalsIgnoreCase(abstractDatastore
+				.getApiName())) {
+			List<RecipeIngredient> c = ofy().load()
+					.type(RecipeIngredient.class).limit(limit).list();
+			for (RecipeIngredient foodCatagories : c) {
+				nBuilder.append(JsonAnalyser.printJSON(foodCatagories));
+			}
+		} else if (RECIPE.equalsIgnoreCase(abstractDatastore.getApiName())) {
+			List<Recipe> c = ofy().load().type(Recipe.class).limit(limit)
+					.list();
+			for (Recipe foodCatagories : c) {
+				nBuilder.append(JsonAnalyser.printJSON(foodCatagories));
+			}
 		}
 		return nBuilder.toString();
 	}
