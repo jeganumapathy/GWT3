@@ -15,7 +15,7 @@ import com.sample.g.server.handler.AbstractHandler;
 import com.sample.g.server.handler.RequestHandler;
 
 public class JsonService implements Constants {
-	Gson gson = null;
+	public Gson gson = null;
 	BaseHttpServlet basehttpservlet;
 	AbstractHandler abstractHandler;
 

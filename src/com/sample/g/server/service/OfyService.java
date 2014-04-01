@@ -36,10 +36,16 @@ public class OfyService implements Constants {
 
 	public static String read(String startLimit, String endLimit,
 			AbstractDatastore abstractDatastore) {
-		int endLimitInt = Integer.valueOf(endLimit);
-		int startLimitInt = Integer.valueOf(endLimit);
-		if (startLimitInt != -1 && startLimitInt < endLimitInt) {
-			return "error should have a limit";
+		int endLimitInt = -1;
+		int startLimitInt = -1;
+		try {
+			endLimitInt = Integer.valueOf(endLimit);
+			startLimitInt = Integer.valueOf(endLimit);
+			if (startLimitInt == -1 && startLimitInt < endLimitInt) {
+				return "error should have a limit in parameter";
+			}
+		} catch (NumberFormatException e) {
+			return "No limit Number is found in parameter";
 		}
 		return readData(abstractDatastore, endLimitInt);
 	}

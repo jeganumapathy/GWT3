@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sample.g.server.handler.RequestHandler;
 import com.sample.g.server.handler.ResponseHandler;
-import com.sample.g.server.service.OfyService;
 
 public class ApiServlet extends BaseHttpServlet {
 

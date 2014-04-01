@@ -48,5 +48,9 @@ public class RequestHandler extends AbstractHandler {
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
 	}
+	
+	public JsonService getJsonHandler(){
+		return jsonHandler;
+	}
 
 }
