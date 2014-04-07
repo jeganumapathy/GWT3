@@ -28,7 +28,7 @@ public class DeleteApiServelet extends BaseHttpServlet {
 	}
 
 	@Override
-	public void onPostComplete() throws IOException {
+	public void onPostComplete(Object result) throws IOException {
 		HttpServletResponse response = responseHandler.getResponse();
 		response.setContentType("text/plain");
 		response.getWriter().println("Deleted..");

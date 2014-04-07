@@ -34,11 +34,13 @@ public class RetriveApiServlet extends BaseHttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 		super.doGet(req, resp);
-		requestHandler.doProcessGet();
+		resp.setContentType("text/plain");
+		resp.getWriter().println(DATA);
+		// requestHandler.doProcessGet();
 	}
 
 	@Override
-	public void onPostComplete() throws IOException {
+	public void onPostComplete(Object result) throws IOException {
 		HttpServletResponse response = responseHandler.getResponse();
 		String data = requestHandler.getRequest().getParameter(DATA);
 		JsonService jsonService = requestHandler.getJsonHandler();

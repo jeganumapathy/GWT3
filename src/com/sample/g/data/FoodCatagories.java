@@ -1,9 +1,10 @@
 package com.sample.g.data;
 
+import com.googlecode.objectify.annotation.Embed;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
-@Entity
+@Entity @Embed
 public class FoodCatagories extends AbstractDatastore {
 
 	public FoodCatagories() {

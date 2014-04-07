@@ -9,8 +9,8 @@ public class StoreService implements IService {
 	}
 
 	@Override
-	public void doProcessing() {
-		StoreFactory.store(jsonService.abstractDatastore);
+	public Object doProcessing() {
+		return StoreFactory.store(jsonService.abstractDatastore);
 	}
 
 	@Override

@@ -36,7 +36,7 @@ public class StoreFactory implements Constants {
 	 * 
 	 * @param dataStore
 	 */
-	public static void store(AbstractDatastore dataStore) {
+	public static String  store(AbstractDatastore dataStore) {
 		if (dataStore instanceof FoodCatagories) {
 			FoodCatagories obj = (FoodCatagories) dataStore;
 			if (shouldSave(dataStore))
@@ -51,6 +51,7 @@ public class StoreFactory implements Constants {
 			RecipeIngredient obj = (RecipeIngredient) dataStore;
 			ofy().save().entity(obj).now();
 		}
+		return "Succces";
 	}
 
 	public static boolean shouldSave(AbstractDatastore dataStore) {

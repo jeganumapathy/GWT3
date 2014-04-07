@@ -2,6 +2,7 @@ package com.sample.g.data;
 
 import java.util.List;
 
+
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
@@ -14,8 +15,16 @@ public class RecipeIngredient extends AbstractDatastore {
 	@Id
 	public Long id;
 	public String comments;
+
 	public List<Ingredient> ingredientList;
 
+	public List<Ingredient> getIngredientList() {
+		return ingredientList;
+	}
+
+	public void setIngredientList(List<Ingredient> ingredientList) {
+		this.ingredientList = ingredientList;
+	}
 	public long getId() {
 		return id;
 	}
@@ -32,12 +41,5 @@ public class RecipeIngredient extends AbstractDatastore {
 		this.comments = comments;
 	}
 
-	public List<Ingredient> getIngredientList() {
-		return ingredientList;
-	}
-
-	public void setIngredientList(List<Ingredient> ingredientList) {
-		this.ingredientList = ingredientList;
-	}
 
 }

@@ -17,9 +17,6 @@ public class DeleteService implements IService {
 		this.jsonService = jsonService;
 	}
 
-	@Override
-	public void doProcessing() {
-	}
 
 	@Override
 	public void checkService() {
@@ -61,6 +58,12 @@ public class DeleteService implements IService {
 		for (Ingredient fc : ingredients) {
 			ofy().delete().type(Ingredient.class).id(fc.getId()).now();
 		}
+	}
+
+
+	@Override
+	public Object doProcessing() {
+		return null;
 	}
 
 }

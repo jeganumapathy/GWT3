@@ -28,7 +28,7 @@ public class JsonService implements Constants {
 		return json;
 	}
 
-	public void onHandle(String json) {
+	public Object onHandle(String json) {
 		this.json = json;
 		abstractDatastore = gson.fromJson(json, AbstractDatastore.class);
 		if (FOODCATAGORIES.equalsIgnoreCase(abstractDatastore.getApiName())) {
@@ -44,7 +44,6 @@ public class JsonService implements Constants {
 		IServiceDelegate businessDelegate = new IServiceDelegate();
 		businessDelegate.setJsonService(this);
 		businessDelegate.setServletTpe(basehttpservlet);
-		businessDelegate.doTaskService();
+		return businessDelegate.doTaskService();
 	}
-
 }

@@ -30,15 +30,15 @@ public class RequestHandler extends AbstractHandler {
 		startLimit = request.getParameter(START_LIMIT);
 		endLimit = request.getParameter(END_LIMIT);
 		if (requestJson != null && requestJson.length() > 2) {
-			jsonHandler.onHandle(requestJson);
+			Object obj = jsonHandler.onHandle(requestJson);
 			if (actionListener != null) {
-				actionListener.onPostComplete();
+				actionListener.onPostComplete(obj);
 			}
 		}
 	}
 
 	@Override
-	public void doProcessGet()  {
+	public void doProcessGet() {
 		if (actionListener != null) {
 			try {
 				actionListener.onGetComplete();
@@ -55,8 +55,8 @@ public class RequestHandler extends AbstractHandler {
 	public void setRequest(HttpServletRequest request) {
 		this.request = request;
 	}
-	
-	public JsonService getJsonHandler(){
+
+	public JsonService getJsonHandler() {
 		return jsonHandler;
 	}
 

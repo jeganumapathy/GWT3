@@ -8,20 +8,23 @@ public class IServiceDelegate {
 	private IService businessService;
 	private BaseHttpServlet servletType;
 	private JsonService jsonService;
+	public String result;
 
 	public void setServletTpe(BaseHttpServlet servletType) {
 		this.servletType = servletType;
 	}
-	
-	public void setJsonService(JsonService jsonService){
+
+	public void setJsonService(JsonService jsonService) {
 		this.jsonService = jsonService;
 	}
 
-	public void doTaskService() {
+	public Object doTaskService() {
 		lookUpService.setJsonService(jsonService);
 		businessService = lookUpService.getBusinessService(servletType);
 		if (businessService != null)
-			businessService.doProcessing();
+			return businessService.doProcessing();
+		return null;
+
 	}
 
 }

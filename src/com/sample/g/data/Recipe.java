@@ -10,7 +10,7 @@ public class Recipe extends AbstractDatastore {
 	}
 
 	@Id
-	public  Long id;
+	public Long id;
 	public String name;
 	public String description;
 	public String source;
@@ -21,7 +21,16 @@ public class Recipe extends AbstractDatastore {
 	public String calories;
 	public String nutritions;
 	public String instruction;
+
 	public RecipeIngredient ingredient;
+
+	public RecipeIngredient getIngredient() {
+		return ingredient;
+	}
+
+	public void setIngredient(RecipeIngredient ingredient) {
+		this.ingredient = ingredient;
+	}
 
 	public long getId() {
 		return id;
@@ -109,14 +118,6 @@ public class Recipe extends AbstractDatastore {
 
 	public void setInstruction(String instruction) {
 		this.instruction = instruction;
-	}
-
-	public RecipeIngredient getIngredient() {
-		return ingredient;
-	}
-
-	public void setIngredient(RecipeIngredient ingredient) {
-		this.ingredient = ingredient;
 	}
 
 }
