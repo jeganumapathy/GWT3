@@ -32,9 +32,9 @@ public class RetriveApiServlet extends BaseHttpServlet {
 
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException {
+			throws IOException, ServletException {
+		super.doGet(req, resp);
 		requestHandler.doProcessGet();
-
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class RetriveApiServlet extends BaseHttpServlet {
 	public void onGetComplete() throws IOException {
 		HttpServletResponse resp = responseHandler.getResponse();
 		resp.setContentType("text/plain");
-		resp.getWriter().println(DATA + "=" + OfyService.read("", "", null));
+		resp.getWriter().println(DATA);
 	}
 
 }

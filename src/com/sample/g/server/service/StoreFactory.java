@@ -79,7 +79,7 @@ public class StoreFactory implements Constants {
 				return true;
 			}
 		}else if(RECIPEINGREDIENT.equalsIgnoreCase(dataStore.getApiName())){
-			//RecipeIngredient obj = (RecipeIngredient) dataStore;
+			RecipeIngredient obj = (RecipeIngredient) dataStore;
 		}
 		return true;
 	}

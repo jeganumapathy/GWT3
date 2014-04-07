@@ -2,49 +2,30 @@ package com.sample.g.server.service;
 
 import java.util.List;
 
-import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyFactory;
-import com.googlecode.objectify.ObjectifyService;
+import static com.sample.g.server.service.OfyService.ofy;
 import com.sample.g.data.AbstractDatastore;
-import com.sample.g.data.Constants;
 import com.sample.g.data.FoodCatagories;
 import com.sample.g.data.Ingredient;
 import com.sample.g.data.JsonAnalyser;
 import com.sample.g.data.Recipe;
 import com.sample.g.data.RecipeIngredient;
 
-public class OfyService implements Constants {
+public class RetriveService implements IService {
 
-	static {
-		factory().register(FoodCatagories.class);
-		factory().register(Ingredient.class);
-		factory().register(Recipe.class);
-		factory().register(RecipeIngredient.class);
+	private JsonService jsonService;
+	public String result;
+
+	public RetriveService(JsonService jsonService) {
+		this.jsonService = jsonService;
 	}
 
-	public static Objectify ofy() {
-		return ObjectifyService.ofy();
+	@Override
+	public void doProcessing() {
+		result=readData(jsonService.abstractDatastore, 10);
 	}
 
-	public static ObjectifyFactory factory() {
-		return ObjectifyService.factory();
-	}
-
-
-	public static String read(String startLimit, String endLimit,
-			AbstractDatastore abstractDatastore) {
-		int endLimitInt = -1;
-		int startLimitInt = -1;
-		try {
-			endLimitInt = Integer.valueOf(endLimit);
-			startLimitInt = Integer.valueOf(endLimit);
-			if (startLimitInt == -1 && startLimitInt < endLimitInt) {
-				return "error should have a limit in parameter";
-			}
-		} catch (NumberFormatException e) {
-			return "No limit Number is found in parameter";
-		}
-		return readData(abstractDatastore, endLimitInt);
+	@Override
+	public void checkService() {
 	}
 
 	public static String readData(AbstractDatastore abstractDatastore, int limit) {
@@ -77,12 +58,5 @@ public class OfyService implements Constants {
 			}
 		}
 		return nBuilder.toString();
-	}
-
-	public static void delete() {
-		List<FoodCatagories> c = ofy().load().type(FoodCatagories.class).list();
-		for (FoodCatagories fc : c) {
-			ofy().delete().type(FoodCatagories.class).id(fc.getId()).now();
-		}
 	}
 }

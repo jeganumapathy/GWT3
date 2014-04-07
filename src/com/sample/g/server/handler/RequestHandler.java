@@ -38,7 +38,14 @@ public class RequestHandler extends AbstractHandler {
 	}
 
 	@Override
-	public void doProcessGet() {
+	public void doProcessGet()  {
+		if (actionListener != null) {
+			try {
+				actionListener.onGetComplete();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public HttpServletRequest getRequest() {

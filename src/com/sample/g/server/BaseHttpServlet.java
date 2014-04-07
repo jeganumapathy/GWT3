@@ -31,5 +31,13 @@ public abstract class BaseHttpServlet extends HttpServlet implements Constants ,
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST, CHECK_POST_JSON);
 		}
 	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		requestHandler.setRequest(req);
+		requestHandler.setOnActionListener(this);
+		responseHandler.setResponse(resp);
+	}
 
 }

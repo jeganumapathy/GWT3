@@ -1,7 +1,10 @@
 package com.sample.g.server.service;
-public class IService {
+
+import com.sample.g.data.Constants;
+
+public interface IService extends Constants{
 	
-	public void onHandleService(){
-	}
+	public void doProcessing();
 	
+	public void checkService();
 }
