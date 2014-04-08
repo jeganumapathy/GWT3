@@ -1,5 +1,7 @@
 package com.sample.g.data;
 
+import javax.persistence.Embedded;
+
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 
@@ -14,6 +16,7 @@ public class Recipe extends AbstractDatastore {
 	public String name;
 	public String description;
 	public String source;
+	@Embedded
 	public FoodCatagories food_catagories;
 	public boolean vegetarian;
 	public String time_to_prepare;
@@ -21,7 +24,7 @@ public class Recipe extends AbstractDatastore {
 	public String calories;
 	public String nutritions;
 	public String instruction;
-
+	@Embedded
 	public RecipeIngredient ingredient;
 
 	public RecipeIngredient getIngredient() {

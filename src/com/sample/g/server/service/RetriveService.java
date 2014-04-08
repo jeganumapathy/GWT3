@@ -4,9 +4,12 @@ import static com.sample.g.server.service.OfyService.ofy;
 
 import java.util.List;
 
+import org.json.JSONArray;
+
 import com.sample.g.data.AbstractDatastore;
 import com.sample.g.data.FoodCatagories;
 import com.sample.g.data.Ingredient;
+import com.sample.g.data.JsonAnalyser;
 import com.sample.g.data.Recipe;
 import com.sample.g.data.RecipeIngredient;
 
@@ -35,24 +38,34 @@ public class RetriveService implements IService {
 
 	public static Object readData(AbstractDatastore abstractDatastore,
 			int limit) {
+		StringBuilder nBuilder = new StringBuilder();
 		if (FOODCATAGORIES.equalsIgnoreCase(abstractDatastore.getApiName())) {
 			List<FoodCatagories> c = ofy().load().type(FoodCatagories.class)
 					.limit(limit).list();
-			return c;
+			for (FoodCatagories foodCatagories : c) {
+				nBuilder.append(JsonAnalyser.printJSON(foodCatagories));
+			}
+
 		} else if (INGREDIENT.equalsIgnoreCase(abstractDatastore.getApiName())) {
 			List<Ingredient> c = ofy().load().type(Ingredient.class)
 					.limit(limit).list();
-			return c;
+			for (Ingredient foodCatagories : c) {
+				nBuilder.append(JsonAnalyser.printJSON(foodCatagories));
+			}
 		} else if (RECIPEINGREDIENT.equalsIgnoreCase(abstractDatastore
 				.getApiName())) {
 			List<RecipeIngredient> c = ofy().load()
 					.type(RecipeIngredient.class).limit(limit).list();
-			return c;
+			for (RecipeIngredient foodCatagories : c) {
+				nBuilder.append(JsonAnalyser.printJSON(foodCatagories));
+			}
 		} else if (RECIPE.equalsIgnoreCase(abstractDatastore.getApiName())) {
 			List<Recipe> c = ofy().load().type(Recipe.class).limit(limit)
 					.list();
-			return c;
+			JSONArray mArray = new JSONArray();
+			mArray.put(c);
+			return mArray;
 		}
-		return null;
+		return nBuilder.toString();
 	}
 }
