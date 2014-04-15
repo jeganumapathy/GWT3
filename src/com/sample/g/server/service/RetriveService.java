@@ -34,6 +34,16 @@ public class RetriveService implements IService {
 		//check for max limit
 		//get the start  and end limit
 		//is the query is valid
+		String limitString = jsonService.basehttpservlet.requestHandler.getRequest().getParameter(LIMIT);
+		if(limitString != null && limitString.length() > 0){
+			try {
+				Integer limit = Integer.valueOf(limitString);
+				MAX_LIMIT = limit;
+			} catch (Exception e) {
+				//error validataion should be assigned
+			}
+		}
+		
 	}
 
 	public static Object readData(AbstractDatastore abstractDatastore,

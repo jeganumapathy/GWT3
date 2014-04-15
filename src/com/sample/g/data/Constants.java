@@ -4,7 +4,7 @@ public interface Constants {
 	String DATA = "data";
 	String START_LIMIT = "start_limit";
 	String END_LIMIT = "end_limit";
-
+	String LIMIT = "limit";
 	String FOODCATAGORIES = "foodcatagories";
 	String INGREDIENT = "ingredient";
 	String RECIPE = "recipe";
