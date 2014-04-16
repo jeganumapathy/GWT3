@@ -1,7 +1,5 @@
 package com.sample.g.server.service;
 
-import org.json.JSONObject;
-
 import com.google.gson.Gson;
 import com.sample.g.data.AbstractDatastore;
 import com.sample.g.data.Constants;
@@ -32,16 +30,21 @@ public class JsonService implements Constants {
 
 	public Object onHandle(String json) {
 		this.json = json;
-		abstractDatastore = gson.fromJson(json, AbstractDatastore.class);
-		if (FOODCATAGORIES.equalsIgnoreCase(abstractDatastore.getApiName())) {
-			abstractDatastore = gson.fromJson(json, FoodCatagories.class);
-		} else if (INGREDIENT.equalsIgnoreCase(abstractDatastore.getApiName())) {
-			abstractDatastore = gson.fromJson(json, Ingredient.class);
-		} else if (RECIPEINGREDIENT.equalsIgnoreCase(abstractDatastore
-				.getApiName())) {
-			abstractDatastore = gson.fromJson(json, RecipeIngredient.class);
-		} else if (RECIPE.equalsIgnoreCase(abstractDatastore.getApiName())) {
-			abstractDatastore = gson.fromJson(json, Recipe.class);
+		try {
+			abstractDatastore = gson.fromJson(json, AbstractDatastore.class);
+			if (FOODCATAGORIES.equalsIgnoreCase(abstractDatastore.getApiName())) {
+				abstractDatastore = gson.fromJson(json, FoodCatagories.class);
+			} else if (INGREDIENT.equalsIgnoreCase(abstractDatastore
+					.getApiName())) {
+				abstractDatastore = gson.fromJson(json, Ingredient.class);
+			} else if (RECIPEINGREDIENT.equalsIgnoreCase(abstractDatastore
+					.getApiName())) {
+				abstractDatastore = gson.fromJson(json, RecipeIngredient.class);
+			} else if (RECIPE.equalsIgnoreCase(abstractDatastore.getApiName())) {
+				abstractDatastore = gson.fromJson(json, Recipe.class);
+			}
+		} catch (Exception e) {
+			return "Invalid Json :" + e.getMessage();
 		}
 		IServiceDelegate businessDelegate = new IServiceDelegate();
 		businessDelegate.setJsonService(this);

@@ -41,6 +41,4 @@ public class RecipeIngredient extends AbstractDatastore {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-
-
 }
