@@ -24,6 +24,8 @@ public class Recipe extends AbstractDatastore {
 	public String calories;
 	public String nutritions;
 	public String instruction;
+	private String recipe_image_url;
+	
 	@Embedded
 	public RecipeIngredient ingredient;
 
@@ -122,5 +124,14 @@ public class Recipe extends AbstractDatastore {
 	public void setInstruction(String instruction) {
 		this.instruction = instruction;
 	}
+
+	public String getRecipe_image_url() {
+		return recipe_image_url;
+	}
+
+	public void setRecipe_image_url(String recipe_image_url) {
+		this.recipe_image_url = recipe_image_url;
+	}
+	
 
 }
